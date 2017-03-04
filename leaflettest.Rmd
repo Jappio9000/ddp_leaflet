@@ -1,0 +1,39 @@
+---
+title: "Leaflet map - exercise"
+author: "J Balvers"
+date: "4 maart 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(leaflet)
+```
+
+## Created on: 2017-03-04
+
+In this map, Marios have taken over the city center of Utrecht, The Netherlands. Can you find the one and only true Mario: Mario 1?
+
+```{r leaflet, echo=FALSE}
+set.seed(010203)
+
+require(leaflet)
+require(htmltools)
+
+marioIcon <- makeIcon(
+  iconUrl =  "http://icons.iconarchive.com/icons/ph03nyx/super-mario/256/Paper-Mario-icon.png",
+  iconWidth = 256/8,
+  iconHeight = 256/8,
+  iconAnchorX = 1,
+  iconAnchorY = 128/8
+)
+  
+df <- data.frame(Names = paste("Mario", c(1:200)),
+                 Lat = runif(200, min=52.0807, max = 52.0963),
+                 Long = runif(200, min=5.0915, max = 5.1403))
+
+df %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(icon = marioIcon, clusterOptions = markerClusterOptions(), popup = ~htmlEscape(Names))
+```
