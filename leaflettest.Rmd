@@ -28,12 +28,12 @@ marioIcon <- makeIcon(
   iconAnchorY = 128/8
 )
   
-df <- data.frame(Names = paste("Mario", c(1:200)),
-                 Lat = runif(200, min=52.0807, max = 52.0963),
-                 Long = runif(200, min=5.0915, max = 5.1403))
+df <- data.frame(Names = paste("Mario", c(1:50)),
+                 Lat = runif(50, min=52.0807, max = 52.0963),
+                 Long = runif(50, min=5.0915, max = 5.1403))
 
 df %>%
   leaflet() %>%
   addTiles() %>%
-  addMarkers(icon = marioIcon, clusterOptions = markerClusterOptions(), popup = ~htmlEscape(Names))
+  addMarkers(icon = marioIcon, popup = ~htmlEscape(Names))
 ```
