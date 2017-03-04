@@ -8,6 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 require(leaflet)
+require(htmltools)
+
 ```
 
 ## Created on: 2017-03-04
@@ -17,16 +19,8 @@ In this map, Marios have taken over the city center of Utrecht, The Netherlands.
 ```{r leaflet, echo=FALSE}
 set.seed(010203)
 
-require(leaflet)
-require(htmltools)
 
-marioIcon <- makeIcon(
-  iconUrl =  "http://icons.iconarchive.com/icons/ph03nyx/super-mario/256/Paper-Mario-icon.png",
-  iconWidth = 256/8,
-  iconHeight = 256/8,
-  iconAnchorX = 1,
-  iconAnchorY = 128/8
-)
+
   
 df <- data.frame(Names = paste("Mario", c(1:50)),
                  Lat = runif(50, min=52.0807, max = 52.0963),
@@ -35,5 +29,5 @@ df <- data.frame(Names = paste("Mario", c(1:50)),
 df %>%
   leaflet() %>%
   addTiles() %>%
-  addMarkers(icon = marioIcon, popup = ~htmlEscape(Names))
+  addMarkers(popup = ~htmlEscape(Names))
 ```
